@@ -1,7 +1,8 @@
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_POP, getDataAction, selectedSongAction } from "../Redux/actions";
+import { GET_POP, addLibraryAction, getDataAction, selectedSongAction } from "../Redux/actions";
 import { useEffect, useState } from "react";
+import { Plus } from "react-bootstrap-icons";
 
 const Rock = (props) => {
     const dispatch = useDispatch();
@@ -41,13 +42,30 @@ const Rock = (props) => {
                                     }
                                 >
                                     <img className="img-fluid" src={songInfo.album.cover_medium} alt="track" />
-                                    <p>
-                                        Track:
-                                        {songInfo.title.length < 16
-                                            ? songInfo.title
-                                            : songInfo.title.substring(0, 16)}{" "}
-                                        <br />
-                                        Artist: {songInfo.artist.name}
+                                    <p className="d-flex align-items-center justify-content-between">
+                                        <span>
+                                            Track:
+                                            {songInfo.title.length < 16
+                                                ? songInfo.title
+                                                : songInfo.title.substring(0, 16)}{" "}
+                                            <br />
+                                            Artist: {songInfo.artist.name}
+                                        </span>
+                                        <Button
+                                            className="text-white "
+                                            variant="transparent"
+                                            onClick={() =>
+                                                dispatch(
+                                                    addLibraryAction(
+                                                        songInfo.title.substring(0, 16),
+                                                        songInfo.album.cover_small,
+                                                        songInfo.album.id
+                                                    )
+                                                )
+                                            }
+                                        >
+                                            <Plus className="fs-3" />
+                                        </Button>
                                     </p>
                                 </Col>
                             ))}

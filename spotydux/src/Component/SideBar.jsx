@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import logo from "../Assets/logo/logo.png";
 import { GET_SEARCH, getDataAction } from "../Redux/actions";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const SideBar = () => {
     const dispatch = useDispatch();
@@ -31,10 +32,10 @@ const SideBar = () => {
                                 </Nav.Link>
                             </li>
                             <li>
-                                <Nav.Link href="#" className="nav-item nav-link d-flex align-items-center">
+                                <NavLink to={"/library"} className="nav-item nav-link d-flex align-items-center">
                                     <BookFill />
                                     &nbsp; Your Library
-                                </Nav.Link>
+                                </NavLink>
                             </li>
                             <li>
                                 <Form onSubmit={handleSubmit} className="input-group mt-3">

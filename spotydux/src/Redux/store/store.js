@@ -4,6 +4,7 @@ import { popReducer } from "../reducers/popReducer";
 import { hipHopReducer } from "../reducers/hiphopReducer";
 import { searchReducer } from "../reducers/searchReducer";
 import selectedReducer from "../reducers/selectedReducer";
+import libraryReducer from "../reducers/addReducer";
 
 const rootReducer = combineReducers({
     rock: rockReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     hiphop: hipHopReducer,
     search: searchReducer,
     selected: selectedReducer,
+    library: libraryReducer,
 });
 
 const store = configureStore({
