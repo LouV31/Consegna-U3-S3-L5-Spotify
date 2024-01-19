@@ -3,11 +3,14 @@ import Gallery from "./Gallery";
 import Rock from "./Rock";
 import Pop from "./Pop";
 import HipHop from "./HipHop";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import Player from "./Player";
+import { selectedSongAction } from "../Redux/actions";
 
 const Main = () => {
     const searchResults = useSelector((state) => state.search.results);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         console.log(searchResults);
@@ -31,7 +34,19 @@ const Main = () => {
                             <h2>Search Results</h2>
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3">
                                 {searchResults.map((songInfo, index) => (
-                                    <Col key={index} className="text-center">
+                                    <Col
+                                        key={index}
+                                        className="text-center"
+                                        onClick={() =>
+                                            dispatch(
+                                                selectedSongAction(
+                                                    songInfo.title.substring(0, 16),
+                                                    songInfo.album.cover_small,
+                                                    songInfo.album.title
+                                                )
+                                            )
+                                        }
+                                    >
                                         <img className="img-fluid" src={songInfo.album.cover_medium} alt="track" />
                                         <p>
                                             Track:
@@ -52,6 +67,11 @@ const Main = () => {
             <Rock artist="la sad" sectionName="Rock" />
             <Pop artist="the kid laroi" sectionName="Pop" />
             <HipHop artist="drake" sectionName="Hip-Hop" />
+            <Row>
+                <Col className="col-10">
+                    <Player />
+                </Col>
+            </Row>
         </>
     );
 };

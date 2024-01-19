@@ -1,6 +1,6 @@
 import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_POP, getDataAction } from "../Redux/actions";
+import { GET_POP, getDataAction, selectedSongAction } from "../Redux/actions";
 import { useEffect, useState } from "react";
 
 const Rock = (props) => {
@@ -27,7 +27,19 @@ const Rock = (props) => {
                             id="rockSection"
                         >
                             {artist.slice(0, 4).map((songInfo, index) => (
-                                <Col key={index} className="text-center">
+                                <Col
+                                    key={index}
+                                    className="text-center"
+                                    onClick={() =>
+                                        dispatch(
+                                            selectedSongAction(
+                                                songInfo.title.substring(0, 16),
+                                                songInfo.album.cover_small,
+                                                songInfo.album.title
+                                            )
+                                        )
+                                    }
+                                >
                                     <img className="img-fluid" src={songInfo.album.cover_medium} alt="track" />
                                     <p>
                                         Track:
